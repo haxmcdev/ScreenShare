@@ -14,7 +14,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class SprawdzCommand implements CommandExecutor {
 
-    // Mapa: admin UUID -> target UUID (kto sprawdza kogo)
     public static Map<UUID, UUID> checking = new ConcurrentHashMap<>();
 
     @Override
@@ -31,7 +30,6 @@ public class SprawdzCommand implements CommandExecutor {
             return true;
         }
 
-        // Komenda stop/cancel kończy sprawdzanie (jeśli trwa)
         if (args.length == 1 && (args[0].equalsIgnoreCase("stop") || args[0].equalsIgnoreCase("cancel"))) {
             if (checking.containsKey(admin.getUniqueId())) {
                 UUID targetUUID = checking.remove(admin.getUniqueId());
@@ -50,7 +48,6 @@ public class SprawdzCommand implements CommandExecutor {
             return true;
         }
 
-        // Normalne użycie: /sprawdz <gracz>
         if (args.length != 1) {
             admin.sendMessage(ConfigManager.getMessage("messages.command.usage"));
             return true;
@@ -68,14 +65,11 @@ public class SprawdzCommand implements CommandExecutor {
             return true;
         }
 
-        // Nie sprawdzamy od razu - tylko otwieramy GUI.
-        // Sprawdzanie (put do mapy checking) zaczyna się dopiero po kliknięciu odpowiedniego przycisku w GUI.
         SprawdzGui gui = new SprawdzGui(target);
         admin.openInventory(gui.getInventory());
         return true;
     }
 
-    // Pobierz admina sprawdzającego danego targeta
     public static UUID getAdminByTarget(UUID targetUUID) {
         for (Map.Entry<UUID, UUID> entry : checking.entrySet()) {
             if (entry.getValue().equals(targetUUID)) {
@@ -85,12 +79,10 @@ public class SprawdzCommand implements CommandExecutor {
         return null;
     }
 
-    // Sprawdź czy dany gracz jest sprawdzany
     public static boolean isBeingChecked(UUID uuid) {
         return checking.containsValue(uuid);
     }
 
-    // Rozpocznij sprawdzanie - dodaj do mapy i zrób broadcast
     public static void startChecking(Player admin, Player target) {
         checking.put(admin.getUniqueId(), target.getUniqueId());
 
@@ -100,7 +92,6 @@ public class SprawdzCommand implements CommandExecutor {
         ));
     }
 
-    // Zakończ sprawdzanie - usuń z mapy i zrób broadcast
     public static void stopChecking(UUID adminUUID) {
         UUID targetUUID = checking.remove(adminUUID);
         if (targetUUID != null) {

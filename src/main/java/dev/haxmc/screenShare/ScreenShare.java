@@ -16,15 +16,24 @@ public class ScreenShare extends JavaPlugin {
         instance = this;
 
         saveDefaultConfig();
-
         ConfigManager.setup(this);
 
-        if (this.getCommand("sprawdz") != null) {
-            this.getCommand("sprawdz").setExecutor(new SprawdzCommand());
-        }
-        if (this.getCommand("przyznajesie") != null) {
-            this.getCommand("przyznajesie").setExecutor(new PrzyznajeSieCommand());
-        }
+        SprawdzCommand sprawdzCommand = new SprawdzCommand();
+        if (getCommand("sprawdz") != null)
+            getCommand("sprawdz").setExecutor(sprawdzCommand);
+        if (getCommand("ss") != null)
+            getCommand("ss").setExecutor(sprawdzCommand);
+        if (getCommand("check") != null)
+            getCommand("check").setExecutor(sprawdzCommand);
+
+        // Register przyznajesie command and aliases pointing to the same executor
+        PrzyznajeSieCommand przyznajeSieCommand = new PrzyznajeSieCommand();
+        if (getCommand("przyznajesie") != null)
+            getCommand("przyznajesie").setExecutor(przyznajeSieCommand);
+        if (getCommand("admit") != null)
+            getCommand("admit").setExecutor(przyznajeSieCommand);
+        if (getCommand("przyznaj") != null)
+            getCommand("przyznaj").setExecutor(przyznajeSieCommand);
 
         getServer().getPluginManager().registerEvents(new GuiClickListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerListeners(), this);
@@ -32,6 +41,7 @@ public class ScreenShare extends JavaPlugin {
 
     @Override
     public void onDisable() {
+
     }
 
     public static ScreenShare getInstance() {
