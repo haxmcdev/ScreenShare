@@ -1,0 +1,20 @@
+name: ScreenShare
+version: 1.0
+main: dev.haxmc.screenShare.ScreenShare
+api-version: 1.16
+commands:
+  sprawdz:
+    usage: /sprawdz <gracz>
+    description: Rozpoczyna sprawdzanie gracza
+    permission: screenshare.use
+  przyznajesie:
+    usage: /przyznajesie
+    description: Gracz przyznaje się do cheatów
+    permission: screenshare.przyznajesie
+permissions:
+  screenshare.use:
+    description: Pozwala na używanie komendy /sprawdz
+    default: op
+  screenshare.przyznajesie:
+    description: Pozwala na używanie komendy /przyznajesie
+    default: true

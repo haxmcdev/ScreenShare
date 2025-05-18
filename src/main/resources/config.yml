@@ -1,0 +1,50 @@
+room:
+  world: "world"
+  x: 100
+  y: 64
+  z: 100
+
+spawn:
+  world: "world"
+  x: 0
+  y: 64
+  z: 0
+
+messages:
+  gui:
+    player-left: "&cPlayer left during checking."
+    teleport: "&aPlayer has been teleported to the room."
+    cleared: "&aPlayer has been marked as clean."
+    ban_cheats: "&cPlayer was banned for cheating."
+    ban_nocoop: "&cPlayer was banned for no cooperation."
+
+    options:
+      teleport: "&aTeleport to room"
+      clear: "&eMark as clean"
+      ban_cheats: "&cBan for cheats"
+      ban_nocoop: "&6Ban for no cooperation"
+
+  command:
+    only-players: "§cOnly players can use this command!"
+    no-permission: "§cYou don't have permission to use this command!"
+    usage: "§eUsage: /sprawdz <player>"
+    not-found: "§cPlayer is not online or does not exist."
+    already-checking: "§cYou are already checking another player."
+    target-already-checked: "§cThis player is already being checked by another admin."
+    cant-check-yourself: "§cYou cannot check yourself."
+    check-stop: "§aYou have stopped checking the player."
+    not-checking: "§cYou are not checking anyone."
+    blocked-during-check: "§cYou cannot use this command while being checked."
+
+  broadcast:
+    started: "&e{admin} started checking player &c{target}&e!"
+    cleared: "&aPlayer {player} has been marked as clean!"
+    ban-cheats: "&cPlayer {player} was banned for cheating!"
+    ban-nocoop: "&cPlayer {player} was banned for no cooperation!"
+    quit-ban: "&cPlayer {player} left during checking and was automatically banned!"
+
+commands:
+  ban_cheats: "ban {target} Cheating"
+  ban_nocoop: "ban {target} No cooperation"
+  admit: "ban {target} Admitted cheating"
+  ban-quit: "ban {target} Left during checking"
